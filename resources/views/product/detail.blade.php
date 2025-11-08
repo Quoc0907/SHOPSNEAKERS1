@@ -2,18 +2,23 @@
 @section("main")
     <!-- breadcrumb -->
     <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-        <a href="{{ url('/') }}" class="s-text16">
+        <a href="index.html" class="s-text16">
             Home
             <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
         </a>
 
+        <a href="product.html" class="s-text16">
+            Women
+            <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+        </a>
+
         <a href="#" class="s-text16">
-            Category
+            T-Shirt
             <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
         </a>
 
         <span class="s-text17">
-			{{ $product_data->TENSP }}
+			Boxy T-Shirt with Roll Sleeve Detail
 		</span>
     </div>
 
@@ -28,6 +33,18 @@
                         <div class="item-slick3" data-thumb="{{ $product_data->HINHANH }}">
                             <div class="wrap-pic-w">
                                 <img src="{{ $product_data->HINHANH }}" alt="{{ $product_data->TENSP }}">
+                            </div>
+                        </div>
+
+                        <div class="item-slick3" data-thumb="{{ asset('public/images') }}/thumb-item-02.jpg">
+                            <div class="wrap-pic-w">
+                                <img src="{{ asset('public/images') }}/product-detail-02.jpg" alt="IMG-PRODUCT">
+                            </div>
+                        </div>
+
+                        <div class="item-slick3" data-thumb="{{ asset('public/images') }}/thumb-item-03.jpg">
+                            <div class="wrap-pic-w">
+                                <img src="{{ asset('public/images') }}/product-detail-03.jpg" alt="IMG-PRODUCT">
                             </div>
                         </div>
                     </div>
@@ -110,7 +127,7 @@
                     <span class="s-text8">Categories: Mug, Design</span>
                 </div>
 
-                <!-- Description -->
+                <!--  -->
                 <div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
                     <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
                         Description
@@ -119,81 +136,331 @@
                     </h5>
 
                     <div class="dropdown-content dis-none p-t-15 p-b-23">
-                        <p class="s-text8">{{ $product_data->MOTA }}</p>
+                        <p class="s-text8">
+                            Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+                        </p>
                     </div>
                 </div>
 
-                <!-- Reviews -->
                 <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
                     <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-                        Reviews ({{ count($reviews ?? []) }})
+                        Additional information
                         <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
                         <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
                     </h5>
 
                     <div class="dropdown-content dis-none p-t-15 p-b-23">
-                        @if(Auth::check())
-                        <form action="{{ url('review/'.$product_data->MASP) }}" method="POST">
-                            @csrf
-                            <div class="rating-stars mb-3">
-                                <input type="radio" name="rating" id="star5" value="5"><label for="star5">★</label>
-                                <input type="radio" name="rating" id="star4" value="4"><label for="star4">★</label>
-                                <input type="radio" name="rating" id="star3" value="3" checked><label for="star3">★</label>
-                                <input type="radio" name="rating" id="star2" value="2"><label for="star2">★</label>
-                                <input type="radio" name="rating" id="star1" value="1"><label for="star1">★</label>
-                            </div>
+                        <p class="s-text8">
+                            Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+                        </p>
+                    </div>
+                </div>
 
-                            <textarea name="comment" class="form-control" rows="3" placeholder="Viết nhận xét của bạn..."></textarea>
+                <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+                    <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+                        Reviews (0)
+                        <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+                        <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+                    </h5>
 
-                            <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 mt-2">
-                                Gửi đánh giá
-                            </button>
-                        </form>
-                        @else
-                            <p class="s-text8">Vui lòng <a href="{{ url('login') }}">đăng nhập</a> để đánh giá sản phẩm.</p>
-                        @endif
-
-                        <hr>
-
-                        @forelse($reviews ?? [] as $review)
-                            <div class="p-t-10">
-                                <strong>{{ $review->user->TEN ?? 'Người dùng ẩn danh' }}</strong>
-                                <div class="text-warning">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <i class="fa fa-star{{ $i <= $review->rating ? '' : '-o' }}"></i>
-                                    @endfor
-                                </div>
-                                <p>{{ $review->comment }}</p>
-                                <small class="text-muted">{{ $review->created_at->format('d/m/Y') }}</small>
-                            </div>
-                        @empty
-                            <p class="s-text8">Chưa có đánh giá nào cho sản phẩm này.</p>
-                        @endforelse
+                    <div class="dropdown-content dis-none p-t-15 p-b-23">
+                        <p class="s-text8">
+                            Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <style>
-        .rating-stars {
-            direction: rtl;
-            display: inline-flex;
-            gap: 5px;
-        }
-        .rating-stars input {
-            display: none;
-        }
-        .rating-stars label {
-            font-size: 25px;
-            color: #ccc;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .rating-stars input:checked ~ label,
-        .rating-stars label:hover,
-        .rating-stars label:hover ~ label {
-            color: #f5a623;
-        }
-    </style>
+
+    <!-- Relate Product -->
+    <section class="relateproduct bgwhite p-t-45 p-b-138">
+        <div class="container">
+            <div class="sec-title p-b-60">
+                <h3 class="m-text5 t-center">
+                    Related Products
+                </h3>
+            </div>
+
+            <!-- Slide2 -->
+            <div class="wrap-slick2">
+                <div class="slick2">
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                <img src="{{ asset('public/images') }}/item-02.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+									$75.00
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="{{ asset('public/images') }}/item-03.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Denim jacket blue
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+									$92.50
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="{{ asset('public/images') }}/item-05.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Coach slim easton black
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+									$165.90
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                <img src="{{ asset('public/images') }}/item-07.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Frayed denim shorts
+                                </a>
+
+                                <span class="block2-oldprice m-text7 p-r-5">
+									$29.50
+								</span>
+
+                                <span class="block2-newprice m-text8 p-r-5">
+									$15.90
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                <img src="{{ asset('public/images') }}/item-02.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Herschel supply co 25l
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+									$75.00
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="{{ asset('public/images') }}/item-03.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Denim jacket blue
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+									$92.50
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <img src="{{ asset('public/images') }}/item-05.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Coach slim easton black
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+									$165.90
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                <img src="{{ asset('public/images') }}/item-07.jpg" alt="IMG-PRODUCT">
+
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- Button -->
+                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                    Frayed denim shorts
+                                </a>
+
+                                <span class="block2-oldprice m-text7 p-r-5">
+									$29.50
+								</span>
+
+                                <span class="block2-newprice m-text8 p-r-5">
+									$15.90
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 @endsection

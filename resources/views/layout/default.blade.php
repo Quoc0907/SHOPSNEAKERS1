@@ -613,5 +613,5 @@
 
 <!--===============================================================================================-->
 <script src="{{ asset("public") }}/js/main.js"></script>
-</body>
+<!-- <script src="{{ asset("public") }}/js/fasheshop.js"></script> -->
 </html>

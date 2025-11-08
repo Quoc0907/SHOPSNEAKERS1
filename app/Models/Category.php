@@ -8,15 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    protected $primaryKey = "MALOAI";
+    protected $keyType = "string";
+    public $incrementing = false;
+    public $timestamps = false;
 
-    protected $fillable = [
-        'name',
-        'description',
-    ];
+    protected $fillable = ["TENLOAI", "HINHANH", "MOTA"];
 
-    // Mối quan hệ: Một Category có nhiều Product
-    public function products()
-    {
-        return $this->hasMany(Product::class);
+    public function scopeIsDeleted($query){
+        return $this->where("XOA", "=", 0);
     }
 }

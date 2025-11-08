@@ -8,26 +8,28 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
-{
-    Schema::create('products', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->text('description')->nullable();
-        $table->decimal('price', 10, 2);
-        $table->string('image')->nullable();
-        $table->integer('stock')->default(0);
-        $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-        $table->timestamps();
-    });
-}
-
+    public function up()
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->string("MASP", 20)->nullable(false)->primary();
+            $table->string("TENSP", 40)->nullable(false)->unique();
+            $table->string("HINHANH", 100)->nullable(false);
+            $table->string("DVT", 20)->nullable(false);
+            $table->string("NUOCSX", 40)->nullable(false);
+            $table->integer("GIA")->nullable(false)->unsigned();
+            $table->text("MOTA")->nullable(true);
+        });
+    }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('products');
     }

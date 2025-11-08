@@ -174,12 +174,13 @@
         <!-- Slide2 -->
         <div class="wrap-slick2">
             <div class="slick2">
+                @foreach($featured_products as $fproduct)
 
-                <div class="item-slick2 p-l-15 p-r-15">
+                 <div class="item-slick2 p-l-15 p-r-15">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                            <img src="{{ asset("public") }}/images/item-02.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ $fproduct->HINHANH }}" alt="{{ $fproduct->TENSP }}" title="{{ $fproduct->TENSP }}">
 
                             <div class="block2-overlay trans-0-4">
                                 <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -197,272 +198,24 @@
                         </div>
 
                         <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Nike Air Force 1
-                            </a>
-                            
-                             <div class="product-rating">
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <span>2 đánh giá</span>
-                             </div>
-
-                            <span class="block2-price m-text6 p-r-5">
-							$120.00
-						</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                            <img src="{{ asset("public") }}/images/item-03.jpg" alt="IMG-PRODUCT">
-
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
-
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Adidas Ultraboost
-                            </a>
-                            <div class="product-rating">
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <i class="fa fa-star text-warning"></i>
-                             <span>4 đánh giá</span>
-                             </div>
-
-                            <span class="block2-price m-text6 p-r-5">
-							$180.00
-						</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                            <img src="{{ asset("public") }}/images/item-05.jpg" alt="IMG-PRODUCT">
-
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
-
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Puma RS-X Future
+                            <!-- gan lien ket cho san pham toi trang chi tiet bang ma san pham -->
+                            <!-- <a href="{{ route("product.detail", ["product" => $fproduct->MASP]) }}" class="block2-name dis-block s-text3 p-b-5">
+                                {{ $fproduct->TENSP }}
+                            </a> -->
+                            <a href="{{ route('product.detail', $fproduct->MASP) }}" class="block2-name dis-block s-text3 p-b-5">
+                                 {{ $fproduct->TENSP }}
                             </a>
 
                             <span class="block2-price m-text6 p-r-5">
-							$140.00
-						</span>
+									{{ number_format($fproduct->GIA) }} &#8363;
+								</span>
                         </div>
+
+                        
+                        
                     </div>
                 </div>
-
-                <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                            <img src="{{ asset("public") }}/images/item-07.jpg" alt="IMG-PRODUCT">
-
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
-
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Classic Canvas Sneaker
-                            </a>
-
-                            <span class="block2-oldprice m-text7 p-r-5">
-							$80.00
-						</span>
-
-                            <span class="block2-newprice m-text8 p-r-5">
-							$49.99
-						</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                            <img src="{{ asset("public") }}/images/item-02.jpg" alt="IMG-PRODUCT">
-
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
-
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Air Max 2025
-                            </a>
-
-                            <span class="block2-price m-text6 p-r-5">
-							$150.00
-						</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                            <img src="{{ asset("public") }}/images/item-03.jpg" alt="IMG-PRODUCT">
-
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
-
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Runner Pro 2
-                            </a>
-
-                            <span class="block2-price m-text6 p-r-5">
-							$129.00
-						</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                            <img src="{{ asset("public") }}/images/item-05.jpg" alt="IMG-PRODUCT">
-
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
-
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Urban Slip-On
-                            </a>
-
-                            <span class="block2-price m-text6 p-r-5">
-							$85.00
-						</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                            <img src="{{ asset("public") }}/images/item-07.jpg" alt="IMG-PRODUCT">
-
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
-
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="block2-txt p-t-20">
-                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                Retro Runner
-                            </a>
-
-                            <span class="block2-oldprice m-text7 p-r-5">
-							$99.00
-						</span>
-
-                            <span class="block2-newprice m-text8 p-r-5">
-							$59.00
-						</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 

@@ -6,25 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-   public function up(): void
-{
-    Schema::create('reviews', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-        $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-        $table->tinyInteger('rating');
-        $table->text('comment')->nullable();
-        $table->timestamps();
-    });
-}
+    public function up(): void
+    {
+        Schema::create('reviews', function (Blueprint $table) {
+            $table->id(); // khóa chính tự tăng
+            $table->string('MASP', 20); // khóa ngoại tham chiếu đến products
+            $table->foreign('MASP')
+                  ->references('MASP')
+                  ->on('products')
+                  ->onDelete('cascade');
+            
+            $table->foreignId('user_id')
+                  ->constrained('users')
+                  ->onDelete('cascade');
+            
+            $table->tinyInteger('rating')->unsigned(); // điểm đánh giá (1-5)
+            $table->text('comment')->nullable(); // nội dung bình luận
+            $table->timestamps();
+        });
+    }
 
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('reviews');

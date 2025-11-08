@@ -6,24 +6,33 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
-{
-    Schema::create('cart_items', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-        $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-        $table->integer('quantity')->default(1);
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('cart_items', function (Blueprint $table) {
+            $table->id();
+            
+            // User ID
+            $table->foreignId('user_id')
+                  ->constrained('users')
+                  ->onDelete('cascade');
+            
+            // Sản phẩm (tham chiếu bằng MASP chứ không phải id)
+            $table->string('MASP', 20);
+            $table->foreign('MASP')
+                  ->references('MASP')
+                  ->on('products')
+                  ->onDelete('cascade');
+            
+            // Số lượng sản phẩm
+            $table->integer('quantity')->unsigned();
+            
+            // Tổng giá
+            $table->decimal('price', 10, 2)->nullable(false);
+            
+            $table->timestamps();
+        });
+    }
 
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('cart_items');
