@@ -1,15 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use Illuminate\Support\Facades\Route;//route chính 
+use App\Http\Controllers\HomeController;//trang home chính 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;//trang home admin chính
+use App\Http\Controllers\CustomerController;//trang quảm lý 
+use App\Http\Controllers\Admin\ProductController as AdminProductController;//trang sp admin 
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReviewController;//dánh giá số sao 
 use App\Http\Controllers\Admin\AuthController; // ✅ Dùng AuthController
 use App\Http\Middleware\EmployeeMiddleWare;
+use App\Http\Controllers\CartController;//thêm sp vào giỏ hàng
+// use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +50,9 @@ Route::prefix("admin")->middleware("auth:admin")->group(function () {
     Route::get("product/edit/{product?}", [AdminProductController::class, "edit"])->name("admin.product.edit");
     Route::post("product/edit", [AdminProductController::class, "edit"]);
     Route::get("product/delete/{product}", [AdminProductController::class, "delete"]);
-    Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product.detail');
-
+    // Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product.detail');
+    Route::get('/product/{id}', [ProductController::class, 'detail'])->name('product.detail');
+    
     // Category
     Route::get("category", [AdminCategoryController::class, "index"])->name("admin.category.index");
     Route::get("category/edit/{category?}", [AdminCategoryController::class, "edit"])->name("admin.category.edit");
@@ -87,3 +90,32 @@ Route::middleware('auth')->group(function () {
         return view('checkout');
     })->name('checkout');
 });
+// Route::post('/logout', function() {
+//     Auth::logout();
+//     return redirect('/');
+// })->name('logout');
+
+// =========================
+// trang giỏ hàng
+// =========================
+Route::group(["prefix" => "cart"], function(){
+    Route::get("/", [CartController::class, "index"])->name("cart.index");
+    Route::get("add/{product}", [CartController::class, "add"]);
+    Route::post("add/{product}", [CartController::class, "add"])->name("cart.add");
+    Route::get("cart/add/{product}", [CartController::class, "add"])->name("cart.add");
+
+    Route::post("update", [CartController::class, "update"])->name("cart.update");
+    Route::get("remove/{product}", [CartController::class, "remove"])->name("cart.remove");
+    Route::get("clear", [CartController::class, "clear"])->name("cart.clear");
+
+
+});
+// =========================
+// Route search cho khách hàng
+// =========================
+
+// Route::get('/search', [ProductController::class, 'search'])->name('product.search');
+Route::get('/search', [ProductController::class, 'search'])->name('product.search');
+Route::get('/search-ajax', [ProductController::class, 'searchAjax'])->name('product.search.ajax');
+Route::get('/search-suggest', [ProductController::class, 'searchAjax'])->name('product.search.suggest');
+

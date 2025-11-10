@@ -190,21 +190,25 @@
 
                                 <div class="block2-btn-addcart w-size1 trans-0-4">
                                     <!-- Button -->
-                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                    <!-- <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                         Add to Cart
-                                    </button>
+                                    </button> -->
+                                    <a href="{{ route('cart.add', ['product' => $fproduct->MASP]) }}"
+       class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+        Add to Cart
+    </a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="block2-txt p-t-20">
                             <!-- gan lien ket cho san pham toi trang chi tiet bang ma san pham -->
-                            <!-- <a href="{{ route("product.detail", ["product" => $fproduct->MASP]) }}" class="block2-name dis-block s-text3 p-b-5">
+                            <a href="{{ route("product.detail", ["product" => $fproduct->MASP]) }}" class="block2-name dis-block s-text3 p-b-5">
                                 {{ $fproduct->TENSP }}
-                            </a> -->
-                            <a href="{{ route('product.detail', $fproduct->MASP) }}" class="block2-name dis-block s-text3 p-b-5">
-                                 {{ $fproduct->TENSP }}
                             </a>
+                            <!-- <a href="{{ route('product.detail', $fproduct->MASP) }}" class="block2-name dis-block s-text3 p-b-5">
+                                 {{ $fproduct->TENSP }}
+                            </a> -->
 
                             <span class="block2-price m-text6 p-r-5">
 									{{ number_format($fproduct->GIA) }} &#8363;
@@ -287,7 +291,7 @@
                             </div>
 
                             <div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-								<span class="m-text10 p-b-1 minutes">
+					    			<span class="m-text10 p-b-1 minutes">
 									32
 								</span>
 

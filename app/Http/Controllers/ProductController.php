@@ -76,9 +76,39 @@ class ProductController extends Controller
         $product_data = Product::isDeleted()->where("MASP", "=", $product)->first();
         return view("product.detail", ["product_data" => $product_data]);
     }
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $product = Product::where('MASP', $id)->firstOrFail();
+    //     return view('product.detail', compact('product'));
+    // }
+
+    // Search page
+    public function search(Request $request)
     {
-        $product = Product::where('MASP', $id)->firstOrFail();
-        return view('product.detail', compact('product'));
+        $query = $request->input('query');
+
+        $products = Product::isDeleted()
+            ->where('TENSP', 'LIKE', "%{$query}%")
+            ->get();
+
+        return view('product.search', [
+            'products' => $products,
+            'query' => $query
+        ]);
     }
+
+    // AJAX suggest
+    public function searchAjax(Request $request)
+    {
+        $q = $request->get('q');
+
+        $products = Product::isDeleted()
+            ->where('TENSP', 'LIKE', "%{$q}%")
+            ->limit(5)
+            ->get();
+
+        // Trả về JSON
+        return response()->json($products);
+    }
+
 }

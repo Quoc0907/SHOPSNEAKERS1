@@ -114,8 +114,55 @@
                 </nav>
             </div>
 
+            <!-- Search bar thêm sp-->
+<div class="header-search" style="margin-left: 30px; position: relative;">
+    <form action="{{ route('product.search') }}" method="GET" class="flex items-center space-x-2">
+        <input 
+            type="text" 
+            name="query" 
+            id="search-product" 
+            placeholder="Search products..." 
+            autocomplete="off"
+            style="
+                padding: 8px 15px; 
+                border: 1px solid #ccc; 
+                border-radius: 20px; 
+                width: 250px;
+                outline: none;
+            "
+        >
+        <button 
+            type="submit" 
+            style="
+                background-color: #ff4d4d; 
+                color: white; 
+                border: none; 
+                padding: 8px 15px; 
+                border-radius: 20px;
+                margin-left: 5px;
+            "
+        >
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+
+    <!-- ✅ chỗ này là danh sách gợi ý -->
+            <div id="search-suggest" style="
+                position:absolute; 
+                top:40px; 
+                left:0; 
+                width:100%; 
+                background:#fff; 
+                z-index:999;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+                display:none;">
+            </div>
+            </div>
+
+
             <!-- Header Icon -->
-            <div class="header-icons">
+            <!-- <div class="header-icons">
                 @if(Auth::check())//mới thêm
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <img src="{{ asset('public/images/icons/icon-header-01.png') }}" class="header-icon1" alt="Logout">
@@ -127,12 +174,42 @@
                     <a href="{{ route('login') }}">
                         <img src="{{ asset('public/images/icons/icon-header-01.png') }}" class="header-icon1" alt="Login">
                     </a>
-                @endif
-
+                @endif -->
+                <div class="header-icons">
+                 @if(Auth::check())
+                    <!-- Hiển thị tên người dùng -->
+                    <span style="background: linear-gradient(to right, #d16ba5, #5d26c1); 
+                     color: #fff8b0; 
+                     font-weight: bold; 
+                     padding: 4px 10px; 
+                     border-radius: 8px; 
+                     margin-right: 10px;">
+                     Hi {{ Auth::user()->name }}
+                    </span>       
+                <!-- Nút logout -->
+                   <a href="{{ route('logout') }}" 
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                 <img src="{{ asset('public/images/icons/icon-header-01.png') }}" 
+                 class="header-icon1" 
+                 alt="Logout" 
+                 title="Logout">
+                 </a>
+                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                 @csrf
+                 </form> 
+                 @else
+        <!-- Nút login -->
+                 <a href="{{ route('login') }}">
+                 <img src="{{ asset('public/images/icons/icon-header-01.png') }}" 
+                 class="header-icon1" 
+                 alt="Login" 
+                 title="Login">
+                 </a>
+                 @endif
+                 <span class="linedivide1"></span>
                 <!-- <img src="{{ asset("public") }}/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a> -->
-
-                <span class="linedivide1"></span>
+                <!-- <span class="linedivide1"></span> -->
 
                 <div class="header-wrapicon2">
                     <img src="{{ asset("public") }}/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
@@ -614,4 +691,47 @@
 <!--===============================================================================================-->
 <script src="{{ asset("public") }}/js/main.js"></script>
 <!-- <script src="{{ asset("public") }}/js/fasheshop.js"></script> -->
+ 
+<script>
+$(document).ready(function() {
+
+    $('#search-product').keyup(function() {
+        let query = $(this).val();
+        if (query.length > 0) {
+            $.ajax({
+                url: "{{ route('product.search.ajax') }}",
+                method: "GET",
+                data: { q: query },
+                success: function(data) {
+                    let html = '<ul style="list-style:none; padding:0; margin:0; background:#fff; border:1px solid #ccc;">';
+                    if (data.length > 0) {
+                        data.forEach(function(item) {
+                            html += `<li style="padding:5px 10px; cursor:pointer;" 
+                                        onclick="window.location.href='/product/${item.MASP}'">
+                                        ${item.TENSP}
+                                     </li>`;
+                        });
+                    } else {
+                        html += '<li style="padding:5px 10px;">No products found</li>';
+                    }
+                    html += '</ul>';
+                    $('#search-suggest').fadeIn().html(html);
+                }
+            });
+        } else {
+            $('#search-suggest').fadeOut();
+        }
+    });
+
+    // Click ra ngoài ẩn gợi ý
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('#search-product').length) {
+            $('#search-suggest').fadeOut();
+        }
+    });
+});
+</script>
+
+</body>
 </html>
+
