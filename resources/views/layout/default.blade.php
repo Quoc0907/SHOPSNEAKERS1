@@ -116,49 +116,42 @@
 
             <!-- Search bar thêm sp-->
 <div class="header-search" style="margin-left: 30px; position: relative;">
-    <form action="{{ route('product.search') }}" method="GET" class="flex items-center space-x-2">
+ <form id="search-form" 
+          action="{{ route('product.search') }}" 
+          method="GET" 
+          style="display:flex; align-items:center; width:300px; position:relative;">
+        
+        <!-- Input tìm kiếm -->
         <input 
             type="text" 
-            name="query" 
-            id="search-product" 
-            placeholder="Search products..." 
+            id="search-input" 
+            name="query"
+            placeholder="Tìm sản phẩm..." 
             autocomplete="off"
-            style="
-                padding: 8px 15px; 
-                border: 1px solid #ccc; 
-                border-radius: 20px; 
-                width: 250px;
-                outline: none;
-            "
+            style="padding:8px 15px; border:1px solid #ccc; border-radius:20px; flex:1; outline:none;"
         >
-        <button 
-            type="submit" 
-            style="
-                background-color: #ff4d4d; 
-                color: white; 
-                border: none; 
-                padding: 8px 15px; 
-                border-radius: 20px;
-                margin-left: 5px;
-            "
-        >
+        
+        <!-- Nút submit -->
+        <button type="submit" 
+                style="background-color:#ff4d4d; color:white; border:none; padding:8px 15px; border-radius:20px; margin-left:5px; cursor:pointer;">
             <i class="fa fa-search"></i>
         </button>
-    </form>
 
-    <!-- ✅ chỗ này là danh sách gợi ý -->
-            <div id="search-suggest" style="
+        <!-- Gợi ý -->
+        <div id="search-suggest" style="
                 position:absolute; 
-                top:40px; 
+                top:45px; 
                 left:0; 
                 width:100%; 
                 background:#fff; 
-                z-index:999;
-                border-radius: 8px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+                z-index:999; 
+                border-radius:8px;
+                box-shadow:0 2px 5px rgba(0, 0, 0, 0.15);
                 display:none;">
-            </div>
-            </div>
+        </div>
+    </form>
+</div>
+
 
 
             <!-- Header Icon -->
@@ -690,9 +683,10 @@
 
 <!--===============================================================================================-->
 <script src="{{ asset("public") }}/js/main.js"></script>
-<!-- <script src="{{ asset("public") }}/js/fasheshop.js"></script> -->
+<script src="{{ asset("public") }}/js/fasheshop.js"></script>
+<!-- <script src="{{ asset("public") }}/js/searchAjax.js"></script> -->
  
-<script>
+<!-- <script>
 $(document).ready(function() {
 
     $('#search-product').keyup(function() {
@@ -729,6 +723,37 @@ $(document).ready(function() {
             $('#search-suggest').fadeOut();
         }
     });
+});
+</script> -->
+<script>
+const searchInput = document.getElementById('search-input');
+const suggest = document.getElementById('search-suggest');
+const searchUrl = "{{ route('product.search.ajax') }}"; // ✅ URL chính xác
+
+
+
+searchInput.addEventListener('input', function(){
+    const query = this.value.trim();
+
+    if(query.length === 0){
+        suggest.style.display = 'none';
+        suggest.innerHTML = '';
+        return;
+    }
+
+    fetch(`${searchUrl}?q=${encodeURIComponent(query)}`)
+        .then(res => res.text())
+        .then(html => {
+            suggest.innerHTML = html;
+            suggest.style.display = 'block';
+        });
+});
+
+// Ẩn gợi ý khi click ra ngoài
+document.addEventListener('click', function(e){
+    if(!suggest.contains(e.target) && e.target !== searchInput){
+        suggest.style.display = 'none';
+    }
 });
 </script>
 

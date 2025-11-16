@@ -18,9 +18,14 @@
 
                     <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
                         <!-- Button -->
-                        <a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                        <!-- <a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
                             Shop Now
-                        </a>
+                        </a> -->
+                       <a href="{{ route('shop.index') }}" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                         Shop Now
+                         </a>
+
+
                     </div>
                 </div>
             </div>
@@ -175,54 +180,49 @@
         <div class="wrap-slick2">
             <div class="slick2">
                 @foreach($featured_products as $fproduct)
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                <img src="{{ $fproduct->HINHANH }}" alt="{{ $fproduct->TENSP }}" title="{{ $fproduct->TENSP }}">
 
-                 <div class="item-slick2 p-l-15 p-r-15">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                            <img src="{{ $fproduct->HINHANH }}" alt="{{ $fproduct->TENSP }}" title="{{ $fproduct->TENSP }}">
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
 
-                            <div class="block2-overlay trans-0-4">
-                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                </a>
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <!-- POST Form Add to Cart -->
+                                        <<form action="{{ route('cart.addToCheckout') }}" method="POST">
+    @csrf
+    <input type="hidden" name="product_id" value="{{ $fproduct->MASP }}">
+    <input type="hidden" name="size" value="M">
+    <input type="hidden" name="color" value="Red">
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+        Mua ngay
+    </button>
+</form>
 
-                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                    <!-- Button -->
-                                    <!-- <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                        Add to Cart
-                                    </button> -->
-                                    <a href="{{ route('cart.add', ['product' => $fproduct->MASP]) }}"
-       class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-        Add to Cart
-    </a>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="{{ route('product.detail', ['product' => $fproduct->MASP]) }}" class="block2-name dis-block s-text3 p-b-5">
+                                    {{ $fproduct->TENSP }}
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+                                    {{ number_format($fproduct->GIA) }} &#8363;
+                                </span>
+                            </div>
                         </div>
-
-                        <div class="block2-txt p-t-20">
-                            <!-- gan lien ket cho san pham toi trang chi tiet bang ma san pham -->
-                            <a href="{{ route("product.detail", ["product" => $fproduct->MASP]) }}" class="block2-name dis-block s-text3 p-b-5">
-                                {{ $fproduct->TENSP }}
-                            </a>
-                            <!-- <a href="{{ route('product.detail', $fproduct->MASP) }}" class="block2-name dis-block s-text3 p-b-5">
-                                 {{ $fproduct->TENSP }}
-                            </a> -->
-
-                            <span class="block2-price m-text6 p-r-5">
-									{{ number_format($fproduct->GIA) }} &#8363;
-								</span>
-                        </div>
-
-                        
-                        
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
-
     </div>
 </section>
 

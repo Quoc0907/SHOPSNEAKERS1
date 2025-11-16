@@ -2206,5 +2206,54 @@ input.num-product::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.search-suggest {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+.search-suggest-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-suggest-item:last-child {
+    border-bottom: none;
+}
+
+.search-suggest-item:hover {
+    background: #f8f8f8;
+}
+
+.search-suggest-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.search-suggest-item span {
+    font-size: 14px;
+    color: #333;
+}
+
+.search-suggest-item span.price {
+    margin-left: auto;
+    font-weight: bold;
+    color: #ff4d4d;
+}
 
 

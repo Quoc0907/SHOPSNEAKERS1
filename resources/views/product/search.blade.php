@@ -1,6 +1,7 @@
 @extends('layout.default')
 
 @section('main')
+
 <div class="container p-t-50 p-b-50">
     <h2 class="text-center m-b-30">Kết quả tìm kiếm cho: <b>{{ $query }}</b></h2>
 
@@ -12,7 +13,9 @@
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                     <div class="block2">
                         <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                            <img src="{{ asset('public/images/'.$product->image) }}" alt="IMG-PRODUCT">
+                            
+                            <!-- <img src="{{ asset('public/images/'.$product->image) }}" alt="IMG-PRODUCT"> -->
+                           <img src="{{ asset($product->HINHANH) }}" alt="IMG-PRODUCT">
                             <div class="block2-overlay trans-0-4">
                                 <div class="block2-btn-addcart w-size1 trans-0-4">
                                     <a href="{{ route('cart.add', $product->MASP) }}" 

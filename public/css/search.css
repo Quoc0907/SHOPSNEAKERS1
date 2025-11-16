@@ -1,0 +1,80 @@
+/* Ô tìm kiếm tổng thể */
+.search-form {
+    position: relative;
+    display: inline-block;
+    width: 280px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Gợi ý kết quả */
+#search-suggest {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 999;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Item từng sản phẩm */
+.suggest-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.suggest-item:last-child {
+    border-bottom: none;
+}
+
+.suggest-item:hover {
+    background: #f8f9fa;
+}
+
+/* Hình sản phẩm nhỏ */
+.suggest-item img {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+/* Tên sản phẩm */
+.suggest-item .suggest-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Giá sản phẩm */
+.suggest-item .suggest-price {
+    font-size: 13px;
+    color: #ff4d4f;
+    font-weight: 600;
+    margin-left: auto;
+}

@@ -1,30 +1,5 @@
 <?php
 
-// namespace App\Http\Controllers;
-
-// use App\Models\Category;
-// use App\Models\Product;
-// use Illuminate\Http\Request;
-
-// class ProductController extends Controller
-// {
-//     public function index(){
-//         $category_data = Category::isDeleted()->get();
-//         $product_data = Product::isDeleted()->get();
-//         return view("product.index", [
-//             "category_data" => $category_data,
-//             "product_data" => $product_data
-//         ]);
-//     }
-
-//     public function detail(){
-//         $product = request()->product; // lay ma san pham tren url
-//        $product_data = Product::find($product)->where("XOA", "=", 0); // truy van du lieu tu ma san pham
-//         $product_data = Product::isDeleted()->where("MASP", "=", $product)->first();
-//         return view("product.detail", ["product_data" => $product_data]);
-//     }
-// }
-
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -33,16 +8,19 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    /**
+     * Trang shop chính
+     */
+    public function index(Request $request)
     {
         // Lấy danh mục chưa xóa
         $category_data = Category::isDeleted()->get();
 
-        // Lấy tham số trên URL (nếu có)
-        $category = request()->get('category');
-        $search = request()->get('search');
+        // Lấy tham số URL
+        $category = $request->get('category');
+        $search = $request->get('search');
 
-        // Truy vấn sản phẩm
+        // Truy vấn sản phẩm chưa xóa
         $query = Product::isDeleted();
 
         if (!empty($category)) {
@@ -53,7 +31,8 @@ class ProductController extends Controller
             $query->where('TENSP', 'like', "%{$search}%");
         }
 
-        $product_data = $query->paginate(3);
+        // Phân trang
+        $product_data = $query->paginate(12);
 
         return view('product.index', [
             'category_data' => $category_data,
@@ -61,28 +40,28 @@ class ProductController extends Controller
         ]);
     }
 
-    // public function detail()
-    // {
-    //     $product = request()->product; // lấy mã sản phẩm trên URL
-    //     $product_data = Product::isDeleted()
-    //         ->where('MASP', $product)
-    //         ->first();
+    /**
+     * Trang chi tiết sản phẩm
+     */
+    public function detail($product)
+{
+    $product_data = Product::isDeleted()
+        ->where('MASP', $product)
+        ->firstOrFail();
 
-    //     return view('product.detail', ['product_data' => $product_data]);
-    // }
-    public function detail(){
-        $product = request()->product; // lay ma san pham tren url
-//        $product_data = Product::find($product)->where("XOA", "=", 0); // truy van du lieu tu ma san pham
-        $product_data = Product::isDeleted()->where("MASP", "=", $product)->first();
-        return view("product.detail", ["product_data" => $product_data]);
-    }
-    // public function show($id)
-    // {
-    //     $product = Product::where('MASP', $id)->firstOrFail();
-    //     return view('product.detail', compact('product'));
-    // }
+    $related_products = Product::isDeleted()
+        ->where('MASP', '!=', $product_data->MASP)
+        ->where('LOAI', $product_data->LOAI)
+        ->inRandomOrder()
+        ->limit(6)
+        ->get();
 
-    // Search page
+    return view('product.detail', compact('product_data', 'related_products'));
+}
+
+    /**
+     * Trang kết quả search
+     */
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -97,18 +76,48 @@ class ProductController extends Controller
         ]);
     }
 
-    // AJAX suggest
+    /**
+     * AJAX suggest search
+     */
     public function searchAjax(Request $request)
     {
         $q = $request->get('q');
 
-        $products = Product::isDeleted()
-            ->where('TENSP', 'LIKE', "%{$q}%")
-            ->limit(5)
-            ->get();
+        $products = Product::where('TENSP', 'LIKE', "%{$q}%")
+                            ->where('XOA', 0)
+                            ->limit(5)
+                            ->get();
 
-        // Trả về JSON
-        return response()->json($products);
+        $html = '';
+        if($products->count() > 0){
+            foreach($products as $p){
+                $html .= '
+                <a href="'.route('product.detail', ['product' => $p->MASP]).'" class="search-suggest-item">
+                    <img src="'.asset($p->HINHANH).'" alt="'.$p->TENSP.'">
+                    <span>'.$p->TENSP.'</span>
+                    <span class="price">'.number_format($p->GIA).'đ</span>
+                </a>';
+            }
+        } else {
+            $html = '<div class="search-suggest-item">Không tìm thấy sản phẩm</div>';
+        }
+
+        return $html;
     }
+    // Product.php
+public function sizes() {
+    return $this->hasMany(ProductSize::class, 'product_id', 'MASP');
+}
 
+public function colors() {
+    return $this->hasMany(ProductColor::class, 'product_id', 'MASP');
+}
+public function addToCheckout(Request $request)
+{
+    $request->merge(['quantity' => 1]); // mặc định 1 sản phẩm
+    $this->add($request); // gọi method add để thêm vào giỏ hàng
+    return redirect()->route('cart.pay'); // chuyển thẳng sang trang thanh toán
+}
+
+    
 }

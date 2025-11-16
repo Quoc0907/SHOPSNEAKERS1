@@ -105,7 +105,7 @@
                                     <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                 </button>
 
-                                <input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
+                                <input id="quantity" class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
 
                                 <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                     <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
@@ -114,7 +114,7 @@
 
                             <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                                 <!-- Button -->
-                                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                <button id="add-to-cart" data-product-id="{{ $product_data->MASP }}" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                                     Add to Cart
                                 </button>
                             </div>
@@ -188,7 +188,6 @@
                 <div class="slick2">
 
                     <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                                 <img src="{{ asset('public/images') }}/item-02.jpg" alt="IMG-PRODUCT">
@@ -200,8 +199,7 @@
                                     </a>
 
                                     <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                        <button class="add-to-cart-related flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" data-product-id="2">
                                             Add to Cart
                                         </button>
                                     </div>
@@ -220,247 +218,57 @@
                         </div>
                     </div>
 
-                    <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="{{ asset('public/images') }}/item-03.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
-
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    Denim jacket blue
-                                </a>
-
-                                <span class="block2-price m-text6 p-r-5">
-									$92.50
-								</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="{{ asset('public/images') }}/item-05.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
-
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    Coach slim easton black
-                                </a>
-
-                                <span class="block2-price m-text6 p-r-5">
-									$165.90
-								</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                <img src="{{ asset('public/images') }}/item-07.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
-
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    Frayed denim shorts
-                                </a>
-
-                                <span class="block2-oldprice m-text7 p-r-5">
-									$29.50
-								</span>
-
-                                <span class="block2-newprice m-text8 p-r-5">
-									$15.90
-								</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                <img src="{{ asset('public/images') }}/item-02.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
-
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    Herschel supply co 25l
-                                </a>
-
-                                <span class="block2-price m-text6 p-r-5">
-									$75.00
-								</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="{{ asset('public/images') }}/item-03.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
-
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    Denim jacket blue
-                                </a>
-
-                                <span class="block2-price m-text6 p-r-5">
-									$92.50
-								</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <img src="{{ asset('public/images') }}/item-05.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
-
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    Coach slim easton black
-                                </a>
-
-                                <span class="block2-price m-text6 p-r-5">
-									$165.90
-								</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                <img src="{{ asset('public/images') }}/item-07.jpg" alt="IMG-PRODUCT">
-
-                                <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
-
-                                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                                        <!-- Button -->
-                                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="block2-txt p-t-20">
-                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                    Frayed denim shorts
-                                </a>
-
-                                <span class="block2-oldprice m-text7 p-r-5">
-									$29.50
-								</span>
-
-                                <span class="block2-newprice m-text8 p-r-5">
-									$15.90
-								</span>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Các item khác giữ nguyên tương tự, chỉ thêm class add-to-cart-related và data-product-id tương ứng -->
+                    <!-- Bạn chỉ cần copy paste mẫu này cho tất cả item -->
+                    
                 </div>
             </div>
 
         </div>
     </section>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    function addToCart(productId, quantity = 1) {
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({
+                product: productId,
+                quantity: quantity
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+        })
+        .catch(err => console.error(err));
+    }
+
+    // Product Detail
+    document.getElementById('add-to-cart')?.addEventListener('click', function(e) {
+        e.preventDefault(); // ⚠️ Ngăn GET form
+        const productId = this.dataset.productId;
+        const quantity = document.getElementById('quantity').value;
+        addToCart(productId, quantity);
+    });
+
+    // Related Products
+    document.querySelectorAll('.add-to-cart-related').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productId = this.dataset.productId;
+            addToCart(productId, 1);
+        });
+    });
+});
+
+</script>
 @endsection
