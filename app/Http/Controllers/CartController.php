@@ -158,4 +158,45 @@ Mail::to($user->email)->send(new OrderMailable($order, $user));
 
         return back()->with('success', 'Đã xóa sản phẩm khỏi giỏ hàng!');
     }
+   
+
+ public function addAndCheckout($MASP, Request $request)
+{
+    $user = Auth::user();
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để mua hàng');
+    }
+
+    $product = Product::find($MASP);
+    if (!$product) {
+        return redirect()->back()->with('error', 'Sản phẩm không tồn tại!');
+    }
+
+    $cart = session()->get('cart', []);
+
+    // Lấy size & color từ query, mặc định nếu không có
+    $size = $request->query('size', '36');
+    $color = $request->query('color', 'Default');
+
+    $key = $product->MASP . '-' . $size . '-' . $color;
+
+    if (!isset($cart[$key])) {
+        $cart[$key] = [
+            'MASP' => $product->MASP,
+            'TENSP' => $product->TENSP,
+            'GIA' => $product->GIA,
+            'HINHANH' => $product->HINHANH,
+            'QTY' => 0,
+            'size' => $size,
+            'color' => $color,
+        ];
+    }
+
+    $cart[$key]['QTY'] += 1;
+    session()->put('cart', $cart);
+
+    // Chuyển thẳng sang trang thanh toán
+    return redirect()->route('payment.index');
+}
+
 }

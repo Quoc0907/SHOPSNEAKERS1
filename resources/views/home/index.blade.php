@@ -6,7 +6,7 @@
 <section class="slide1">
     <div class="wrap-slick1">
         <div class="slick1">
-            <div class="item-slick1 item1-slick1" style="background-image: url({{ asset("public") }}/images/master-slide-02.jpg);">
+            <div class="item-slick1 item1-slick1"  style="background-image: url('{{ asset('public/images/master-slide-02.jpg') }}'); height: 580px;">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 					<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
 						ShopSneakers Collection 2025
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="item-slick1 item2-slick1" style="background-image: url({{ asset("public") }}/images/master-slide-03.jpg);">
+            <div class="item-slick1 item2-slick1" style="background-image: url('{{ asset('public/images/master-slide-03.jpg') }}'); height: 580px;">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 					<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
 						ShopSneakers Collection 2025
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="item-slick1 item3-slick1" style="background-image: url({{ asset("public") }}/images/master-slide-04.jpg);">
+            <div class="item-slick1 item3-slick1"  style="background-image: url('{{ asset('public/images/master-slide-04.jpg') }}'); height: 580px;">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 					<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
 						ShopSneakers Exclusive
@@ -79,8 +79,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img src="{{ asset("public") }}/images/banner-02.jpg" alt="IMG-BENNER">
-
+                    <img src="{{ asset('public/images/bannerr-02.jpg') }}" alt="IMG-BENNER" style="height: 380px; object-fit: cover;">
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
                         <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
@@ -91,8 +90,7 @@
 
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img src="{{ asset("public") }}/images/banner-05.jpg" alt="IMG-BENNER">
-
+                    <img src="{{ asset('public/images/banner-05.jpg') }}" alt="IMG-BENNER">
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
                         <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
@@ -105,7 +103,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img src="{{ asset("public") }}/images/banner-03.jpg" alt="IMG-BENNER">
+                   <img src="{{ asset('public/images/banner-03.jpg') }}" alt="IMG-BENNER">
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
@@ -117,8 +115,7 @@
 
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img src="{{ asset("public") }}/images/banner-07.jpg" alt="IMG-BENNER">
-
+                    <img src="{{ asset('public/images/bannerr-07.jpg') }}" alt="IMG-BANNER">
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
                         <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
@@ -131,7 +128,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img src="{{ asset("public") }}/images/banner-04.jpg" alt="IMG-BENNER">
+                    <img src="{{ asset('public/images/bannerr-04.jpg') }}" alt="IMG-BENNER">
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
@@ -232,7 +229,7 @@
         <div class="row">
             <div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
                 <div class="hov-img-zoom pos-relative">
-                    <img src="{{ asset("public") }}/images/banner-08.jpg" alt="IMG-BANNER">
+                    <img src="{{ asset('public/images/bannerr-08.jpg') }}" alt="IMG-BENNER">
 
                     <div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
 						<span class="m-text9 p-t-45 fs-20-sm">
@@ -252,7 +249,8 @@
 
             <div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
                 <div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
-                    <img src="{{ asset("public") }}/images/shop-item-09.jpg" alt="IMG-BANNER">
+                    <img src="{{ asset('public/images/shop-items-09.jpg') }}" alt="IMG-BENNER">
+                     
 
                     <div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
                         <div class="t-center">
@@ -332,7 +330,7 @@
                 <!-- Block3 -->
                 <div class="block3">
                     <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img src="{{ asset("public") }}/images/blog-01.jpg" alt="IMG-BLOG">
+                        <img src="{{ asset('public/images/blogs-01.jpg') }}" alt="IMG-BENNER">
                     </a>
 
                     <div class="block3-txt p-t-14">
@@ -356,7 +354,7 @@
                 <!-- Block3 -->
                 <div class="block3">
                     <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img src="{{ asset("public") }}/images/blog-02.jpg" alt="IMG-BLOG">
+                         <img src="{{ asset('public/images/blogs-02.jpg') }}" alt="IMG-BENNER">
                     </a>
 
                     <div class="block3-txt p-t-14">
@@ -380,7 +378,7 @@
                 <!-- Block3 -->
                 <div class="block3">
                     <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img src="{{ asset("public") }}/images/blog-03.jpg" alt="IMG-BLOG">
+                          <img src="{{ asset('public/images/blogs-03.jpg') }}" alt="IMG-BENNER">
                     </a>
 
                     <div class="block3-txt p-t-14">
@@ -414,7 +412,8 @@
     <div class="flex-w">
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src="{{ asset("public") }}/images/gallery-03.jpg" alt="IMG-INSTAGRAM">
+            <img src="{{ asset('public/images/gallerys-03.jpg') }}" alt="IMG-INSTAGRAM">
+
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -436,7 +435,10 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src="{{ asset("public") }}/images/gallery-07.jpg" alt="IMG-INSTAGRAM">
+            <img src="{{ asset('public/images/gallerys-07.jpg') }}" 
+               alt="IMG-INSTAGRAM"
+              style="height: 305px; object-fit: cover;">
+
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -458,7 +460,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src="{{ asset("public") }}/images/gallery-09.jpg" alt="IMG-INSTAGRAM">
+             <img src="{{ asset('public/images/gallerys-09.jpg') }}" alt="IMG-INSTAGRAM"style="height: 305px; object-fit: cover;">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -480,7 +482,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src="{{ asset("public") }}/images/gallery-13.jpg" alt="IMG-INSTAGRAM">
+             <img src="{{ asset('public/images/gallerys-013.jpg') }}" alt="IMG-INSTAGRAM"style="height: 305px; object-fit: cover;">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -502,7 +504,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img src="{{ asset("public") }}/images/gallery-15.jpg" alt="IMG-INSTAGRAM">
+           <img src="{{ asset('public/images/gallerys-015.jpg') }}" alt="IMG-INSTAGRAM"style="height: 305px; object-fit: cover;">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">

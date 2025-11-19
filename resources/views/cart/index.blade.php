@@ -132,12 +132,16 @@ table.cart-table {
 
     <h2 class="cart-title">YOUR CART</h2>
 
+    @php $total = 0; @endphp
+
+    @if(session('cart') && count(session('cart')) > 0)
     <form action="{{ route('cart.update') }}" method="POST">
         @csrf
-
         <table class="cart-table">
             <tr>
                 <th>PRODUCT</th>
+                <th>SIZE</th>
+                <th>COLOR</th>
                 <th>PRICE</th>
                 <th>QUANTITY</th>
                 <th>TOTAL</th>
@@ -145,14 +149,15 @@ table.cart-table {
             </tr>
 
             @foreach ($cart as $id => $item)
+                @php $subtotal = $item['GIA'] * $item['QTY']; $total += $subtotal; @endphp
                 <tr>
                     <td>
-                        <img src="{{ asset('public/images/' . $item['image']) }}" class="cart-img">
-                        <br>
-                        {{ $item['TENSP'] }}
+                        <img src="{{ $item['HINHANH'] }}" class="cart-img" alt="{{ $item['TENSP'] }}">
+                        <br>{{ $item['TENSP'] }}
                     </td>
+                    <td>{{ $item['size'] }}</td>
+                    <td>{{ $item['color'] }}</td>
                     <td>{{ number_format($item['GIA']) }}đ</td>
-
                     <td>
                         <div class="qty-box">
                             <button type="button" class="qty-btn" onclick="changeQty('{{ $id }}', -1)">-</button>
@@ -160,11 +165,7 @@ table.cart-table {
                             <button type="button" class="qty-btn" onclick="changeQty('{{ $id }}', 1)">+</button>
                         </div>
                     </td>
-
-                    <td>
-                        {{ number_format($item['GIA'] * $item['QTY']) }}đ
-                    </td>
-
+                    <td>{{ number_format($subtotal) }}đ</td>
                     <td>
                         <a href="{{ route('cart.delete', $id) }}" class="btn-delete">Xóa</a>
                     </td>
@@ -176,31 +177,31 @@ table.cart-table {
         <div class="cart-actions">
             <button type="submit" class="btn-black">UPDATE CART</button>
         </div>
-
     </form>
 
     <div class="cart-totals">
         <h3>CART TOTALS</h3>
-
         <div class="total-row">
             <span>Subtotal:</span>
-            <span>{{ number_format($subtotal) }}đ</span>
+            <span>{{ number_format($total) }}đ</span>
         </div>
-
         <div class="total-row">
             <span>Shipping:</span>
             <span>Free</span>
         </div>
-
         <div class="total-row">
             <strong>Total:</strong>
-            <strong>{{ number_format($subtotal) }}đ</strong>
+            <strong>{{ number_format($total) }}đ</strong>
         </div>
 
-        <a href="{{ route('payment.page') }}">
+        <a href="{{ route('payment.index') }}">
             <button class="btn-checkout">PROCEED TO CHECKOUT</button>
         </a>
     </div>
+
+    @else
+        <p>Giỏ hàng trống.</p>
+    @endif
 
 </div>
 

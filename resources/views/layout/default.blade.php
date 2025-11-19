@@ -75,44 +75,54 @@
 
 
             <!-- Menu -->
-            <div class="wrap_menu">
-                <nav class="menu">
-                    <ul class="main_menu">
-                        <li>
-                            <a href="index.html">Home</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
-                        </li>
+           <div class="wrap_menu">
+    <nav class="menu">
+        <ul class="main_menu">
 
-                        <li>
-                            <a href="product.html">Shop</a>
-                        </li>
+            <!-- HOME -->
+            <li>
+                <a href="{{ route('home.index') }}">Home</a>
+                <ul class="sub_menu">
+                    <li><a href="{{ route('home.index') }}">Homepage V1</a></li>
+                    <li><a href="{{ route('home.index') }}">Homepage V2</a></li>
+                    <li><a href="{{ route('home.index') }}">Homepage V3</a></li>
+                </ul>
+            </li>
 
-                        <li class="sale-noti">
-                            <a href="product.html">Sale</a>
-                        </li>
+            <!-- SHOP -->
+            <li>
+                <a href="{{ route('shop.index') }}">Shop</a>
+            </li>
 
-                        <li>
-                            <a href="cart.html">Features</a>
-                        </li>
+            <!-- SALE (lọc sản phẩm giảm giá) -->
+            <li class="sale-noti">
+                <a href="{{ route('product.index', ['filter' => 'sale']) }}">Sale</a>
+            </li>
 
-                        <li>
-                            <a href="blog.html">Blog</a>
-                        </li>
+            <!-- FEATURES (đưa về trang giỏ hàng) -->
+            <li>
+                <a href="{{ route('cart.index') }}">Features</a>
+            </li>
 
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
+            <!-- BLOG -->
+            <li>
+                <a href="{{ route('blog') }}">Blog</a>
+            </li>
 
-                        <li>
-                            <a href="contact.html">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <!-- ABOUT -->
+            <li>
+                <a href="{{ route('about') }}">About</a>
+            </li>
+
+            <!-- CONTACT -->
+            <li>
+                <a href="{{ route('contact') }}">Contact</a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
+
 
             <!-- Search bar thêm sp-->
 <div class="header-search" style="margin-left: 30px; position: relative;">
@@ -205,8 +215,12 @@
                 <!-- <span class="linedivide1"></span> -->
 
                 <div class="header-wrapicon2">
-                    <img src="{{ asset("public") }}/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+    <img src="{{ asset('public/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+    <span class="header-icons-noti">
+        {{ session('cart') ? count(session('cart')) : 0 }}
+    </span>
+</div>
+
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">

@@ -1,7 +1,8 @@
 @extends("layout.default")
 @section("main")
     <!-- Title Page -->
-    <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url({{ asset('public/images') }}/heading-pages-02.jpg);">
+    <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url('{{ asset('public/images/heading-pagess-02.jpg') }}'); height: 360px; background-size: cover; background-position: center;"
+>
         <h2 class="l-text2 t-center">
             Women
         </h2>
@@ -169,7 +170,7 @@
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
                                             <!-- Button -->
                                             <a href="{{ url('cart/add') }}/{{ $product->MASP }}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
+                                                MUA NGAY
                                             </a>
                                         </div>
                                     </div>

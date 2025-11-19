@@ -11,6 +11,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactController;
+
 
 // =========================
 // Trang người dùng
@@ -35,6 +37,14 @@ Route::get('/search-suggest', [ProductController::class, 'searchAjax'])->name('p
 // =========================
 // Giỏ hàng
 // =========================
+ // Cart: add and checkout (GET)
+// Route::get('cart/add/{MASP}', [CartController::class, 'addAndCheckout'])
+//      ->name('cart.add.get');
+Route::get('cart/add/{MASP}', [CartController::class, 'addAndCheckout'])
+     ->name('cart.addAndCheckout'); // <--- đổi tên ở đây
+
+
+
 Route::prefix('cart')->group(function () {
 
     Route::get('/', [CartController::class, 'index'])->name('cart.index');        // xem giỏ hàng
@@ -42,6 +52,8 @@ Route::prefix('cart')->group(function () {
     Route::post('add-to-checkout', [CartController::class, 'addToCheckout'])->name('cart.addToCheckout'); // add + checkout
     Route::post('update', [CartController::class, 'update'])->name('cart.update'); // cập nhật số lượng
     Route::get('delete/{id}', [CartController::class, 'delete'])->name('cart.delete'); // xóa 1 sản phẩm
+    // Route::get('add/{id}', [CartController::class, 'add'])->name('cart.add');
+   
 });
 
 // order page
@@ -58,6 +70,12 @@ Route::match(['get','post'], '/payment', [CartController::class, 'pay'])->name('
 Route::get('/order-success', function () {
     return view('order.success');
 })->name('order.success');
+
+Route::get('/about', fn() => view('pages.about'))->name('about');
+Route::get('/contact', fn() => view('pages.contact'))->name('contact');
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/blog', fn() => view('pages.blog'))->name('blog');
+Route::get('/blog/{id}', fn($id) => view('pages.blog_detail', ['id'=>$id]))->name('blog.detail');
 
 
 // =========================
