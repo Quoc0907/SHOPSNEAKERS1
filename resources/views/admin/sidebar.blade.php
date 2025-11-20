@@ -41,34 +41,28 @@
                     <p>Quản lý sản phẩm</p>
                 </a>
             </li>
-            <li>
-                <a href="./notifications.html">
+            <li @if($controllerName == "OrderController") class="active " @endif>
+                <a href="{{ route('admin.order.index') }}">
                     <i class="nc-icon nc-bell-55"></i>
-                    <p>Notifications</p>
+                    <p>Quản lý đơn hàng</p>
                 </a>
             </li>
-            <li>
-                <a href="./user.html">
+            <li @if($controllerName == "WarehouseController" and $actionName == "index") class="active " @endif>
+                <a href="{{ route('admin.warehouse.index') }}">
                     <i class="nc-icon nc-single-02"></i>
-                    <p>User Profile</p>
+                    <p>Quản lý kho hàng</p>
                 </a>
             </li>
-            <li>
-                <a href="./tables.html">
+            <li @if($controllerName == "WarehouseController" and $actionName == "stock") class="active " @endif>
+                <a href="{{ route('admin.warehouse.stock') }}">
                     <i class="nc-icon nc-tile-56"></i>
-                    <p>Table List</p>
+                    <p>Quản lý tồn kho</p>
                 </a>
             </li>
-            <li>
-                <a href="./typography.html">
-                    <i class="nc-icon nc-caps-small"></i>
-                    <p>Typography</p>
-                </a>
-            </li>
-            <li class="active-pro">
-                <a href="./upgrade.html">
-                    <i class="nc-icon nc-spaceship"></i>
-                    <p>Upgrade to PRO</p>
+            <li @if($controllerName == "WarehouseController" and $actionName == "transfer") class="active " @endif>
+                <a href="{{ route('admin.warehouse.transfer') }}">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <p>Quản lý chuyển hàng</p>
                 </a>
             </li>
         </ul>

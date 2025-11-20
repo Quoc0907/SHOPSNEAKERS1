@@ -1,127 +1,132 @@
 @extends("layout.admin")
 @section("main")
-<div class="wrapper ">
-    @include("admin.sidebar") <!-- them sidebar -->
+<div class="wrapper">
+    @include("admin.sidebar")
     <div class="main-panel">
-        @include("admin.navbar") <!-- them navbar -->
+        @include("admin.navbar")
         <div class="content">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card card-stats">
-                        <div class="card-body ">
+            <div class="row d-flex align-items-stretch">
+                <!-- Sản phẩm -->
+                <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+                    <div class="card card-stats flex-fill">
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-5 col-md-4">
-                                    <div class="icon-big text-center icon-warning">
+                                <div class="col-5 col-md-4 text-center">
+                                    <div class="icon-big icon-warning">
                                         <i class="nc-icon nc-globe text-warning"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
                                     <div class="numbers">
-                                        <p class="card-category">Capacity</p>
-                                        <p class="card-title">150GB<p>
+                                        <p class="card-category">Sản phẩm</p>
+                                        <p class="card-title">{{ $product_statistic ?? 0 }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer ">
+                        <div class="card-footer">
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-refresh"></i>
-                                Update Now
+                                <i class="fa fa-refresh"></i> Update Now
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card card-stats">
-                        <div class="card-body ">
+
+                <!-- Doanh thu -->
+                <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+                    <div class="card card-stats flex-fill">
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-5 col-md-4">
-                                    <div class="icon-big text-center icon-warning">
+                                <div class="col-5 col-md-4 text-center">
+                                    <div class="icon-big icon-success">
                                         <i class="nc-icon nc-money-coins text-success"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
                                     <div class="numbers">
-                                        <p class="card-category">Revenue</p>
-                                        <p class="card-title">$ 1,345<p>
+                                        <p class="card-category">Doanh thu</p>
+                                        <p class="card-title">$ {{ number_format($revenue ?? 0) }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer ">
+                        <div class="card-footer">
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-calendar-o"></i>
-                                Last day
+                                <i class="fa fa-calendar-o"></i> Month
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card card-stats">
-                        <div class="card-body ">
+
+                <!-- Errors -->
+                <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+                    <div class="card card-stats flex-fill">
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-5 col-md-4">
-                                    <div class="icon-big text-center icon-warning">
+                                <div class="col-5 col-md-4 text-center">
+                                    <div class="icon-big icon-danger">
                                         <i class="nc-icon nc-vector text-danger"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
                                     <div class="numbers">
                                         <p class="card-category">Errors</p>
-                                        <p class="card-title">23<p>
+                                        <p class="card-title" id="errors">{{ $errors ?? 0 }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer ">
+                        <div class="card-footer">
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-clock-o"></i>
-                                In the last hour
+                                <i class="fa fa-clock-o"></i> In the last hour
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card card-stats">
-                        <div class="card-body ">
+
+                <!-- Followers -->
+                <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+                    <div class="card card-stats flex-fill">
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-5 col-md-4">
-                                    <div class="icon-big text-center icon-warning">
+                                <div class="col-5 col-md-4 text-center">
+                                    <div class="icon-big icon-primary">
                                         <i class="nc-icon nc-favourite-28 text-primary"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
                                     <div class="numbers">
                                         <p class="card-category">Followers</p>
-                                        <p class="card-title">+45K<p>
+                                        <p class="card-title" id="followers">{{ $followers ?? '+45K' }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer ">
+                        <div class="card-footer">
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-refresh"></i>
-                                Update now
+                                <i class="fa fa-refresh"></i> Update now
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Biểu đồ Users -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card ">
-                        <div class="card-header ">
+                    <div class="card">
+                        <div class="card-header">
                             <h5 class="card-title">Users Behavior</h5>
                             <p class="card-category">24 Hours performance</p>
                         </div>
-                        <div class="card-body ">
-                            <canvas id=chartHours width="400" height="100"></canvas>
+                        <div class="card-body">
+                            <canvas id="chartHours" width="400" height="100"></canvas>
                         </div>
-                        <div class="card-footer ">
+                        <div class="card-footer">
                             <hr>
                             <div class="stats">
                                 <i class="fa fa-history"></i> Updated 3 minutes ago
@@ -130,17 +135,19 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Biểu đồ Email & NASDAQ -->
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card ">
-                        <div class="card-header ">
+                    <div class="card">
+                        <div class="card-header">
                             <h5 class="card-title">Email Statistics</h5>
                             <p class="card-category">Last Campaign Performance</p>
                         </div>
-                        <div class="card-body ">
+                        <div class="card-body">
                             <canvas id="chartEmail"></canvas>
                         </div>
-                        <div class="card-footer ">
+                        <div class="card-footer">
                             <div class="legend">
                                 <i class="fa fa-circle text-primary"></i> Opened
                                 <i class="fa fa-circle text-warning"></i> Read
@@ -154,6 +161,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-8">
                     <div class="card card-chart">
                         <div class="card-header">
@@ -176,8 +184,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
-        @include("admin.footer") <!-- them footer -->
+        @include("admin.footer")
     </div>
 </div>
 @endsection

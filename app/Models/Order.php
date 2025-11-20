@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon; // cần import Carbon
 
 class Order extends Model
 {
     use HasFactory;
 
     protected $table = 'orders'; 
-    protected $primaryKey = 'id'; // hoặc SOHD nếu bạn dùng tên khác
+    protected $primaryKey = 'id'; // hoặc 'SOHD' nếu bạn dùng khác
     public $timestamps = true;
 
     protected $fillable = [
@@ -23,12 +24,18 @@ class Order extends Model
         'token',
     ];
 
-    protected $dates = ['NGHD', 'created_at', 'updated_at'];
+    // Cast kiểu ngày
+    protected $casts = [
+        'NGHD' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 
     // Accessor để format ngày
     public function getFormattedNGHDAttribute()
     {
-        return $this->NGHD->format('d-m-Y');
+        // ép kiểu Carbon nếu NGHD chưa phải object
+        return $this->NGHD instanceof Carbon ? $this->NGHD->format('d-m-Y') : Carbon::parse($this->NGHD)->format('d-m-Y');
     }
 
     // Quan hệ với user

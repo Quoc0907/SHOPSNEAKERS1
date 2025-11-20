@@ -40,12 +40,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
-    public function index(){
-        return view("admin.home.index");
+    public function index()
+    {
+        $product_statistic = Product::count();           // số sản phẩm
+        $order_statistic = Order::count();               // số đơn hàng
+        $revenue = Order::sum('TRIGIA');                // tổng doanh thu
+
+        return view('admin.home.index', compact(
+            'product_statistic',
+            'order_statistic',
+            'revenue'
+        ));
     }
 
     public function login(Request $request)
@@ -53,7 +63,7 @@ class HomeController extends Controller
         if ($request->isMethod('post')) {
             $credentials = $request->only('email', 'password');
 
-            if (Auth::guard('admin')->attempt($credentials)) {
+            if (\Auth::guard('admin')->attempt($credentials)) {
                 $request->session()->regenerate();
                 return redirect()->route('admin.home.index')->with('success', 'Đăng nhập thành công');
             }
@@ -61,7 +71,7 @@ class HomeController extends Controller
             return back()->with('error', 'Email hoặc mật khẩu không đúng');
         }
 
-        if (Auth::guard('admin')->check()) {
+        if (\Auth::guard('admin')->check()) {
             return redirect()->route('admin.home.index');
         }
 

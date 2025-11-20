@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\WarehouseController as AdminWarehouseController;
 
 
 // =========================
@@ -114,6 +116,33 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('category/edit/{category?}', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
     Route::post('category/edit', [AdminCategoryController::class, 'edit']);
     Route::get('category/delete/{category}', [AdminCategoryController::class, 'delete'])->name('admin.category.delete');
+    Route::get("order", [AdminOrderController::class, "index"])->name("admin.order.index");
+    Route::get("warehouse", [AdminWarehouseController::class, "index"])->name("admin.warehouse.index");
+    Route::get("warehouse/edit/{warehouse?}", [AdminWarehouseController::class, "edit"])->name("admin.warehouse.edit");
+    Route::get("warehouse/stock", [AdminWarehouseController::class, "stock"])->name("admin.warehouse.stock");
+    // Route::get("warehouse/stock/edit{id?}", [AdminWarehouseController::class, "edit_stock"])->name("admin.warehouse.stock.edit");
+    Route::get("warehouse/stock/edit/{MAKHO?}/{MASP?}", [AdminWarehouseController::class, "edit_stock"])->name("admin.warehouse.stock.edit");
+    Route::post("warehouse/stock/update", [AdminWarehouseController::class, "update_stock"])->name("admin.warehouse.stock.update");
+
+    Route::get("warehouse/transfer", [AdminWarehouseController::class, "transfer"])->name("admin.warehouse.transfer");
+    // Form thêm mới chuyển kho
+    Route::get("warehouse/transfer/create", [AdminWarehouseController::class, "create_transfer"])
+    ->name("admin.warehouse.transfer.create");
+
+    // Lưu chuyển kho
+    Route::post("warehouse/transfer/store", [AdminWarehouseController::class, "store_transfer"])
+    ->name("admin.warehouse.store_transfer");
+
+    // Chi tiết đơn hàng
+    Route::get('order/{order}', [AdminOrderController::class, 'show'])->name('admin.order.show');
+
+   // Xóa đơn hàng
+   Route::get('order/delete/{order}', [AdminOrderController::class, 'delete'])->name('admin.order.delete');
+
+   Route::put('admin/order/update-status/{order}', [AdminOrderController::class, 'updateStatus'])->name('admin.order.updateStatus');
+
+
+
 
     // ✅ Route đổi mật khẩu admin
     Route::get('change-password', [AuthController::class, 'showChangePasswordForm'])->name('admin.changePasswordForm');

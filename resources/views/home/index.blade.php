@@ -191,16 +191,16 @@
 
                                     <div class="block2-btn-addcart w-size1 trans-0-4">
                                         <!-- POST Form Add to Cart -->
-                                        <<form action="{{ route('cart.addToCheckout') }}" method="POST">
-    @csrf
-    <input type="hidden" name="product_id" value="{{ $fproduct->MASP }}">
-    <input type="hidden" name="size" value="M">
-    <input type="hidden" name="color" value="Red">
-    <input type="hidden" name="quantity" value="1">
-    <button type="submit" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-        Mua ngay
-    </button>
-</form>
+                                        <form action="{{ route('cart.addToCheckout') }}" method="POST">
+                                     @csrf
+                                     <input type="hidden" name="product_id" value="{{ $fproduct->MASP }}">
+                                     <input type="hidden" name="size" value="M">
+                                     <input type="hidden" name="color" value="Red">
+                                     <input type="hidden" name="quantity" value="1">
+                                     <button type="submit" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                          Mua ngay
+                                     </button>
+                                     </form>
 
                                     </div>
                                 </div>
