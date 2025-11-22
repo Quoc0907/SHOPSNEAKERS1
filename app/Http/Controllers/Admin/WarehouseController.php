@@ -14,55 +14,103 @@ class WarehouseController extends Controller
     // -----------------------------
     // Danh sách kho
     // -----------------------------
-    public function index(){
+    public function index()
+    {
         $warehouses = Warehouse::all();
         return view("admin.warehouse.index", compact('warehouses'));
     }
 
-    // Thêm/Sửa kho
-    public function edit($warehouse = null){
-        $data = $warehouse ? Warehouse::find($warehouse) : null;
+    // -----------------------------
+    // Form thêm kho mới
+    // -----------------------------
+    public function create()
+    {
+        $data = null; // để form biết là thêm mới
         return view("admin.warehouse.edit", compact("data"));
     }
 
-    public function update(Request $request){
+    // -----------------------------
+    // Form sửa kho
+    // -----------------------------
+    public function edit($warehouse)
+    {
+        $data = Warehouse::findOrFail($warehouse);
+        return view("admin.warehouse.edit", compact("data"));
+    }
+
+    // -----------------------------
+    // Lưu kho mới
+    // -----------------------------
+    public function store(Request $request)
+    {
         $request->validate([
-            'MAKHO'=>'required|max:20',
+            'MAKHO'=>'required|max:20|unique:warehouses,MAKHO',
             'TENKHO'=>'required|max:40',
             'DCHI'=>'required|max:50',
             'SODT'=>'required|max:20'
         ]);
 
-        Warehouse::updateOrCreate(
-            ['MAKHO'=>$request->MAKHO],
-            $request->only('TENKHO','DCHI','SODT')
-        );
+        Warehouse::create($request->only('MAKHO','TENKHO','DCHI','SODT'));
+
+        return redirect()->route('admin.warehouse.index')->with('success','Thêm kho thành công!');
+    }
+
+    // -----------------------------
+    // Cập nhật kho
+    // -----------------------------
+    public function update(Request $request, $warehouse)
+    {
+        $request->validate([
+            'TENKHO'=>'required|max:40',
+            'DCHI'=>'required|max:50',
+            'SODT'=>'required|max:20'
+        ]);
+
+        $kho = Warehouse::findOrFail($warehouse);
+        $kho->update($request->only('TENKHO','DCHI','SODT'));
 
         return redirect()->route('admin.warehouse.index')->with('success','Cập nhật kho thành công!');
     }
 
+    // -----------------------------
     // Xóa kho
-    public function delete($warehouse){
-        Warehouse::find($warehouse)?->delete();
+    // -----------------------------
+    public function delete($warehouse)
+    {
+        Warehouse::findOrFail($warehouse)->delete();
         return redirect()->route('admin.warehouse.index')->with('success','Xóa kho thành công!');
     }
 
     // -----------------------------
     // Quản lý tồn kho sản phẩm
     // -----------------------------
-    public function stock(){
+    public function stock()
+    {
         $stocks = WarehouseDetail::with('warehouse','product')->get();
         return view('admin.warehouse.stock', compact('stocks'));
     }
 
-    public function edit_stock($MAKHO = null, $MASP = null){
-        $data = $MAKHO && $MASP ? WarehouseDetail::find([$MAKHO,$MASP]) : null;
+    // Form thêm mới tồn kho
+    public function create_stock()
+    {
+        $data = null;
         $warehouses = Warehouse::all();
         $products = Product::all();
         return view('admin.warehouse.edit_stock', compact('data','warehouses','products'));
     }
 
-    public function update_stock(Request $request){
+    // Form sửa tồn kho
+    public function edit_stock($MAKHO, $MASP)
+    {
+        $data = WarehouseDetail::find([$MAKHO,$MASP]);
+        $warehouses = Warehouse::all();
+        $products = Product::all();
+        return view('admin.warehouse.edit_stock', compact('data','warehouses','products'));
+    }
+
+    // Lưu tồn kho (thêm mới hoặc update)
+    public function update_stock(Request $request)
+    {
         $request->validate([
             'MAKHO'=>'required',
             'MASP'=>'required',
@@ -90,7 +138,6 @@ class WarehouseController extends Controller
         return view('admin.warehouse.transfer', compact('warehouses','transfers'));
     }
 
-    // Form thêm mới chuyển kho
     public function create_transfer()
     {
         $warehouses = Warehouse::all();
@@ -98,7 +145,6 @@ class WarehouseController extends Controller
         return view('admin.warehouse.create_transfer', compact('warehouses','products'));
     }
 
-    // Lưu chuyển kho
     public function store_transfer(Request $request)
     {
         $request->validate([
@@ -109,7 +155,6 @@ class WarehouseController extends Controller
             'NNHAN'=>'required|date'
         ]);
 
-        // Kiểm tra tồn kho kho nguồn
         $source = WarehouseDetail::where('MAKHO',$request->NGUON_GIAO)
                                  ->where('MASP',$request->MASP)
                                  ->first();
@@ -118,17 +163,14 @@ class WarehouseController extends Controller
             return back()->with('error','Số lượng kho nguồn không đủ');
         }
 
-        // Trừ kho nguồn
         $source->SL -= $request->SL;
         $source->save();
 
-        // Cộng kho nhận
         WarehouseDetail::updateOrCreate(
             ['MAKHO'=>$request->DIEM_NHAN,'MASP'=>$request->MASP],
             ['SL'=> \DB::raw("SL + {$request->SL}")]
         );
 
-        // Lưu lịch sử chuyển kho
         WarehouseToWarehouse::create($request->only('NGUON_GIAO','DIEM_NHAN','MASP','SL','NNHAN'));
 
         return redirect()->route('admin.warehouse.transfer')->with('success','Chuyển kho thành công!');

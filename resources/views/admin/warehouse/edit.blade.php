@@ -8,22 +8,51 @@
         <div class="content">
             <h3>{{ $data ? 'Sửa kho: '.$data->TENKHO : 'Thêm kho mới' }}</h3>
 
-            <form method="POST" action="">
+            <form method="POST" 
+                action="{{ $data 
+                    ? route('admin.warehouse.update', $data->MAKHO) 
+                    : route('admin.warehouse.store') }}">
                 @csrf
+                @if($data)
+                    @method('PUT')
+                @endif
 
-                <label>Mã kho</label>
-                <input type="text" name="MAKHO" value="{{ $data->MAKHO ?? '' }}" class="form-control">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                <label>Tên kho</label>
-                <input type="text" name="TENKHO" value="{{ $data->TENKHO ?? '' }}" class="form-control">
+                <div class="mb-3">
+                    <label class="form-label">Mã kho</label>
+                    <input type="text" name="MAKHO" class="form-control" 
+                           value="{{ $data->MAKHO ?? old('MAKHO') }}" 
+                           {{ $data ? 'readonly' : '' }} required>
+                </div>
 
-                <label>Địa chỉ</label>
-                <input type="text" name="DCHI" value="{{ $data->DCHI ?? '' }}" class="form-control">
+                <div class="mb-3">
+                    <label class="form-label">Tên kho</label>
+                    <input type="text" name="TENKHO" class="form-control" 
+                           value="{{ $data->TENKHO ?? old('TENKHO') }}" required>
+                </div>
 
-                <label>Số điện thoại</label>
-                <input type="text" name="SODT" value="{{ $data->SODT ?? '' }}" class="form-control">
+                <div class="mb-3">
+                    <label class="form-label">Địa chỉ</label>
+                    <input type="text" name="DCHI" class="form-control" 
+                           value="{{ $data->DCHI ?? old('DCHI') }}">
+                </div>
 
-                <button class="btn btn-primary mt-3">Lưu</button>
+                <div class="mb-3">
+                    <label class="form-label">Số điện thoại</label>
+                    <input type="text" name="SODT" class="form-control" 
+                           value="{{ $data->SODT ?? old('SODT') }}">
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Lưu</button>
             </form>
         </div>
 

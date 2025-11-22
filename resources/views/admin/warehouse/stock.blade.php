@@ -10,10 +10,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title pull-left">Tồn kho</h4>
-                            <a href="{{ route('admin.warehouse.stock.edit') }}"
-                               class="btn btn-outline-primary pull-right">
-                                Thêm mới
-                            </a>
+                            <a href="{{ route('admin.warehouse.stock.create') }}"
+                                 class="btn btn-outline-primary pull-right">
+                                 Thêm mới
+                             </a>
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

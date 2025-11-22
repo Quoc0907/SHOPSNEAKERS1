@@ -21,7 +21,8 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form action="{{ route('admin.warehouse.store_transfer') }}" method="POST">
+                            <form action="{{ route('admin.warehouse.transfer.store') }}" method="POST">
+
                                 @csrf
                                 <div class="form-group">
                                     <label>Kho nguồn</label>

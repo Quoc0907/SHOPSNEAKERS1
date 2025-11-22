@@ -117,21 +117,63 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::post('category/edit', [AdminCategoryController::class, 'edit']);
     Route::get('category/delete/{category}', [AdminCategoryController::class, 'delete'])->name('admin.category.delete');
     Route::get("order", [AdminOrderController::class, "index"])->name("admin.order.index");
-    Route::get("warehouse", [AdminWarehouseController::class, "index"])->name("admin.warehouse.index");
-    Route::get("warehouse/edit/{warehouse?}", [AdminWarehouseController::class, "edit"])->name("admin.warehouse.edit");
-    Route::get("warehouse/stock", [AdminWarehouseController::class, "stock"])->name("admin.warehouse.stock");
-    // Route::get("warehouse/stock/edit{id?}", [AdminWarehouseController::class, "edit_stock"])->name("admin.warehouse.stock.edit");
-    Route::get("warehouse/stock/edit/{MAKHO?}/{MASP?}", [AdminWarehouseController::class, "edit_stock"])->name("admin.warehouse.stock.edit");
-    Route::post("warehouse/stock/update", [AdminWarehouseController::class, "update_stock"])->name("admin.warehouse.stock.update");
+    // =========================
+    // Quản lý kho
+    // =========================
+    Route::get("warehouse", [AdminWarehouseController::class, "index"])
+    ->name("admin.warehouse.index"); // Danh sách kho
 
-    Route::get("warehouse/transfer", [AdminWarehouseController::class, "transfer"])->name("admin.warehouse.transfer");
-    // Form thêm mới chuyển kho
+Route::get("warehouse/create", [AdminWarehouseController::class, "create"])
+    ->name("admin.warehouse.create"); // Form thêm kho mới
+
+Route::post("warehouse/store", [AdminWarehouseController::class, "store"])
+    ->name("admin.warehouse.store"); // Lưu kho mới
+
+Route::get("warehouse/edit/{warehouse}", [AdminWarehouseController::class, "edit"])
+    ->name("admin.warehouse.edit"); // Form sửa kho
+
+Route::put("warehouse/update/{warehouse}", [AdminWarehouseController::class, "update"])
+    ->name("admin.warehouse.update"); // Lưu cập nhật kho
+
+Route::get("warehouse/delete/{warehouse}", [AdminWarehouseController::class, "delete"])
+    ->name("admin.warehouse.delete"); // Xóa kho
+
+    // =========================
+    // Quản lý tồn kho (stock)
+    // =========================
+    
+Route::get("warehouse/stock", [AdminWarehouseController::class, "stock"])
+    ->name("admin.warehouse.stock");
+
+// Form thêm mới tồn kho
+Route::get("warehouse/stock/create", [AdminWarehouseController::class, "create_stock"])
+    ->name("admin.warehouse.stock.create");
+
+// Form sửa tồn kho
+Route::get("warehouse/stock/edit/{MAKHO}/{MASP}", [AdminWarehouseController::class, "edit_stock"])
+    ->name("admin.warehouse.stock.edit");
+
+// Lưu thay đổi tồn kho (cả thêm mới và cập nhật)
+Route::post("warehouse/stock/update", [AdminWarehouseController::class, "update_stock"])
+    ->name("admin.warehouse.stock.update");
+
+    Route::get("warehouse/stock/create", [AdminWarehouseController::class, "create_stock"])
+    ->name("admin.warehouse.stock.create");
+
+
+
+
+    // =========================
+    // Quản lý chuyển kho (transfer)
+    // =========================
+    Route::get("warehouse/transfer", [AdminWarehouseController::class, "transfer"])
+        ->name("admin.warehouse.transfer"); // Danh sách phiếu chuyển kho
+
     Route::get("warehouse/transfer/create", [AdminWarehouseController::class, "create_transfer"])
-    ->name("admin.warehouse.transfer.create");
+        ->name("admin.warehouse.transfer.create"); // Form tạo phiếu chuyển kho mới
 
-    // Lưu chuyển kho
     Route::post("warehouse/transfer/store", [AdminWarehouseController::class, "store_transfer"])
-    ->name("admin.warehouse.store_transfer");
+        ->name("admin.warehouse.transfer.store"); // Lưu phiếu chuyển kho mới
 
     // Chi tiết đơn hàng
     Route::get('order/{order}', [AdminOrderController::class, 'show'])->name('admin.order.show');
